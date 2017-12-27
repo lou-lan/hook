@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
 	"net/http"
 )
 
@@ -19,4 +21,5 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("err")
 	}
 	bodyString := string(bodyBytes)
+	fmt.Println(bodyString)
 }
