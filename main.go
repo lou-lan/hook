@@ -16,11 +16,12 @@ func main() {
 }
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
-	bodyBytes, err := ioutil.ReadAll(r.Response.Body)
-	defer r.Response.Body.Close()
+	b, err := ioutil.ReadAll(r.Body)
+	defer r.Body.Close()
 	if err != nil {
-		fmt.Println("err")
+		http.Error(w, err.Error(), 500)
+		return
 	}
-	bodyString := string(bodyBytes)
+	bodyString := string(b)
 	fmt.Println(bodyString)
 }
