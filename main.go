@@ -17,6 +17,7 @@ func main() {
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
 	bodyBytes, err := ioutil.ReadAll(r.Response.Body)
+	defer r.Response.Body.Close()
 	if err != nil {
 		fmt.Println("err")
 	}
