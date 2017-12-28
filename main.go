@@ -7,21 +7,18 @@ import (
 	"net/http"
 )
 
+func webhook(w http.ResponseWriter, r *http.Request) {
+	b, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		log.Println("错误")
+	}
+	fmt.Println(b)
+}
+
 func main() {
-	http.HandleFunc("/", sayhelloName)
+	http.HandleFunc("/", webhook)
 	err := http.ListenAndServe(":80", nil)
 	if err != nil {
 		log.Fatal("ListenAndServe: ", err)
 	}
-}
-
-func sayhelloName(w http.ResponseWriter, r *http.Request) {
-	b, err := ioutil.ReadAll(r.Body)
-	defer r.Body.Close()
-	if err != nil {
-		http.Error(w, err.Error(), 500)
-		return
-	}
-	bodyString := string(b)
-	fmt.Println(bodyString)
 }
