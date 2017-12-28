@@ -12,7 +12,7 @@ func webhook(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Println("错误")
 	}
-	fmt.Println(b)
+	fmt.Println(string(b))
 }
 
 func main() {
